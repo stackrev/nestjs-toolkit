@@ -5,7 +5,7 @@ import { createHash } from 'crypto';
 @Global()
 @Injectable()
 export class Sha256Service {
-  constructor(@Inject(SHA256_PREFIX) private readonly partOne, @Inject(SHA256_SUFFIX) private readonly partTwo) {}
+  constructor(@Inject(SHA256_PREFIX) private readonly prefix, @Inject(SHA256_SUFFIX) private readonly suffix) {}
 
   strToSha256(str: string, digest: 'hex' | 'base64' = 'base64') {
     return createHash('sha256').update(this.getCleanedStr(str)).digest(digest);
@@ -17,6 +17,6 @@ export class Sha256Service {
   }
 
   private getCleanedStr(str: string) {
-    return this.partOne + str + this.partTwo;
+    return this.prefix + str + this.suffix;
   }
 }

@@ -6,7 +6,7 @@ import { SHA256_PREFIX, SHA256_SUFFIX, SHA256_SECRET } from './sha256.constants'
 @Global()
 @Module({})
 export class Sha256Module {
-  static register(options?: { secret: string; prefix?: string; suffix?: string }) {
+  static register(options?: { secret?: string; prefix?: string; suffix?: string }) {
     const secret = options?.secret || Sha256DefaultConfig.secret;
     let prefix = '';
     let suffix = '';
