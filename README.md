@@ -1,6 +1,6 @@
 # NestJS Useful Toolkit
 
-> Useful tools for the NestJs framework. The tools are listed below:‌
+> Useful tools for the **NestJs** framework based on **Express.js** . The tools are listed below:‌
 >
 > > **`Crypto`**, **`Decorators`**, **`Error Methods`**, **`Filters`**, **`Interceptors`**, **`Middlewares`**, **`Providers`**, **`Sha256`**, **`Swagger`**, **`Helpers`**, ...
 
@@ -14,6 +14,84 @@ $ npm install --save nest-toolkit
 
 # yarn
 $ yarn add nest-toolkit
+```
+
+<hr />
+
+> ### **Security Middlewares**
+
+```typescript
+// before use you must install required packages
+$ npm i --save compression helmet morgan
+// or
+$ yarn add compression helmet morgan
+```
+
+```typescript
+// main.ts
+import { UseCorsConfig, UseMainMiddlewares } from 'nest-toolkit';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'log', 'verbose'],
+  });
+
+  UseCorsConfig.use(app, {
+    // CorsOptions
+  });
+  UseMainMiddlewares.use(app);
+
+  await app.listen(3000);
+}
+
+bootstrap();
+```
+
+<hr />
+
+> ### **Prisma module**
+>
+> This module is used to work with Prisma ORM.
+
+```typescript
+// before use you must install prisma
+$ npm i --save prisma @prisma/client
+// or
+$ yarn add prisma @prisma/client
+```
+
+```typescript
+// app.module.ts
+import { PrismaModule } from 'nest-toolkit';
+
+@Module({
+  imports: [PrismaModule],
+})
+export class AppModule {}
+```
+
+```typescript
+// your.service.ts
+import { PrismaService, PaginatedResult } from 'nest-toolkit';
+
+export class YourService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async firstUser(): Promise<any> {
+    return await this.prisma.user.findFirst();
+  }
+
+  async paginate(meta: { page?: string; take?: string } = {}): Promise<PaginatedResult> {
+    const query = {
+      where: { ... },
+      select: { ... },
+      orderBy: { ... },
+    };
+    // paginate('model': string, meta: object, query: object)
+    return await this.prisma.paginate('user', meta, query);
+  }
+}
 ```
 
 <hr />
@@ -97,7 +175,7 @@ export class YourService {
 
 > ### **Swagger Starter**
 >
-> > This tools has custom styles
+> This tools has custom styles
 
 ```typescript
 // main.ts

@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { Global, Injectable } from '@nestjs/common';
 import { throwUnprocessableEntity, throwNotFound } from '../errors';
-import { prismaPaginationQuery } from 'src/helpers';
+import { prismaPaginationQuery } from '../helpers';
 
 export interface PaginatedResult<T> {
   data: T[];

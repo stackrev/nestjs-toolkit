@@ -1,6 +1,6 @@
 {
   "name": "nest-toolkit",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "NestJS useful toolkit",
   "author": "Mostafa Gholami <mostafagholamidev@gmail.com>",
   "license": "MIT",
