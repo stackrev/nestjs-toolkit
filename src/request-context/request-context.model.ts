@@ -8,5 +8,17 @@ export class RequestContext {
     return this.cls.getStore();
   }
 
+  static get currentReq() {
+    return this.cls.getStore().req;
+  }
+
+  static get currentHeaders() {
+    return this.cls.getStore().req.headers;
+  }
+
+  static get currentCookies() {
+    return this.cls.getStore().req.cookies;
+  }
+
   constructor(public readonly req: Request, public readonly res: Response) {}
 }
