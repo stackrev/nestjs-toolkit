@@ -5,7 +5,9 @@ import { json, urlencoded } from 'express';
 import { Logger } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
-export const Helmet = helmet();
+export const Helmet = helmet({
+  crossOriginResourcePolicy: false,
+});
 
 export const Compression = compression();
 
